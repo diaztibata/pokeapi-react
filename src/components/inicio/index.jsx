@@ -7,6 +7,16 @@ function Inicio() {
 
   const navigate = useNavigate();
   const [todoslospokes, setTodoslospokes] = useState([]);
+  const [busqueda, setBusqueda] = useState('');
+  
+  let resultados = todoslospokes;
+
+  if (busqueda.length >= 3 && isNaN(busqueda)) {
+    resultados = todoslospokes.filter(pokemon =>
+      pokemon.name.toLowerCase().includes(busqueda.toLowerCase())
+    );
+  }
+
 
       useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/pokemon?limit=1025`)
@@ -20,8 +30,16 @@ function Inicio() {
     return <p>Cargando...</p>;
   }
   return (
+    <>
+        <input
+        type="text"
+        placeholder="Buscar Pokémon"
+        value={busqueda}
+        onChange={(e) => setBusqueda(e.target.value)}
+        className="c-buscador"
+      />
     <div className="c-lista">
-    {todoslospokes.map((pokemon) => (
+    {resultados.map((pokemon) => (
       <div className='c-lista-pokemon'
        onClick={() => navigate(`/pokemon/${pokemon.name}`)}
       >
@@ -32,7 +50,7 @@ function Inicio() {
         />
       </div>
     ))}
-    </div>
+    </div></>
   )
 }
 
