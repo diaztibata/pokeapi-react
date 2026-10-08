@@ -76,6 +76,12 @@
   touch-action: manipulation;
 }
 
+.coleccion-nuevo.repetido {
+  border-color: #e28a8a;
+  background: #fde8e8;
+  color: #8b2020;
+}
+
 .coleccion-nuevo p {
   margin: 2px 0;
   text-transform: capitalize;
