@@ -7,7 +7,7 @@ function Coleccion() {
   const [listaCapturados, setListaCapturados] = useState(() => {
     try {
       const guardados = JSON.parse(localStorage.getItem('misNumeros') || '[]');
-      return Array.isArray(guardados) ? guardados.map(Number) : [];
+      return Array.isArray(guardados) ? [...new Set(guardados.map(Number))] : [];
     } catch {
       return [];
     }
@@ -25,14 +25,20 @@ function Coleccion() {
   }, []);
 
   const capturarAleatorios = () => {
-    const disponibles = espacio.filter((id) => !listaCapturados.includes(id));
-    const seleccionados = disponibles
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 4);
-    const actualizados = [...listaCapturados, ...seleccionados];
+    const seleccionados = Array.from(
+      { length: 4 },
+      () => Math.floor(Math.random() * totalPokes) + 1
+    );
+    const vistos = new Set(listaCapturados);
+    const resultados = seleccionados.map((id) => {
+      const repetido = vistos.has(id);
+      vistos.add(id);
+      return { id, repetido };
+    });
+    const actualizados = [...vistos];
 
     setListaCapturados(actualizados);
-    setNuevos(seleccionados);
+    setNuevos(resultados);
     localStorage.setItem('misNumeros', JSON.stringify(actualizados));
   };
 
@@ -50,10 +56,10 @@ function Coleccion() {
 
       {nuevos.length > 0 && <h2 className="coleccion-subtitulo">Tus nuevos Pokémon</h2>}
       <section className="coleccion-nuevos">
-        {nuevos.map((id) => (
+        {nuevos.map(({ id, repetido }, indice) => (
           <div
-            key={id}
-            className="coleccion-nuevo"
+            key={`${id}-${indice}`}
+            className={repetido ? 'coleccion-nuevo repetido' : 'coleccion-nuevo'}
             onClick={() => navigate(`/pokemon/${id}`)}
           >
             <p>{id}</p>
