@@ -1,0 +1,138 @@
+.coleccion {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 24px 16px 110px;
+  color: #202632;
+  font-family: system-ui, sans-serif;
+}
+
+.coleccion-titulo {
+  margin: 0 0 16px;
+  font-size: 1.6rem;
+  font-weight: 750;
+}
+
+.coleccion-contador {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.coleccion-contador span {
+  color: #7b8492;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.coleccion-boton {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin-bottom: 22px;
+  border: 0;
+  border-radius: 12px;
+  background: #286cdb;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.coleccion-boton:active:not(:disabled) {
+  background: #1d57b7;
+}
+
+.coleccion-boton:disabled {
+  background: #aab3c0;
+  cursor: default;
+}
+
+.coleccion-subtitulo {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.coleccion-nuevos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.coleccion-nuevo {
+  min-width: 0;
+  padding: 10px 6px;
+  border: 1px solid #e1e6ed;
+  border-radius: 14px;
+  background: #f5f7fa;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.coleccion-nuevo p {
+  margin: 2px 0;
+  text-transform: capitalize;
+}
+
+.coleccion-nuevo img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.coleccion-album {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+  padding-bottom: 24px;
+}
+
+.coleccion-pokemon {
+  display: flex;
+  aspect-ratio: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e3e7ed;
+  border-radius: 10px;
+  background: #f1f3f6;
+  color: #9aa2ad;
+  font-size: 0.75rem;
+}
+
+.coleccion-pokemon p {
+  margin: 0;
+}
+
+.coleccion-pokemon.capturado {
+  border-color: #a8dfc7;
+  background: #e8f7ef;
+  color: #245f43;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.coleccion-pokemon img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+@media (max-width: 350px) {
+  .coleccion {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .coleccion-album {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
